@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>侧边导航</title>
+  <link rel="stylesheet" href="./07.css">
+  <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+  <script type="text/javascript">
+  /* 功能： 实现切换导航时显示子列表 */
+    $(() => {
+      for(let a = 0 ; a < 5 ; a++){
+        $(".mynav:eq("+ a +")").hover(() => {
+          $(".nav-child:eq("+ a +")").toggleClass("hove");
+        });
+      }
+    });
+  </script>
+</head>
+
+<body>
+<!-- nav start -->
+  <div class="nav">
+    <ul class="nav-nav">
+      <li class="mynav">
+        <a href="#">珠宝玉器</a><span>></span>
+        <ul class="nav-child">
+          <li><a href="#">翡翠</a></li>
+          <li><a href="#">玉石</a></li>
+          <li><a href="#">宝石</a></li>
+          <li><a href="#">水晶</a></li>
+          <li><a href="#">玛瑙</a></li>
+          <li><a href="#">珍珠</a></li>
+          <li><a href="#">钻石</a></li>
+          <li><a href="#">琥珀</a></li>
+          <li><a href="#">和田</a></li>
+        </ul>
+      </li>
+      <li class="mynav">
+        <a href="#">珠宝玉器</a><span>></span>
+        <ul class="nav-child">
+          <li><a href="#">翡翠</a></li>
+          <li><a href="#">玉石</a></li>
+          <li><a href="#">宝石</a></li>
+          <li><a href="#">水晶</a></li>
+          <li><a href="#">玛瑙</a></li>
+          <li><a href="#">珍珠</a></li>
+        </ul>
+      </li>
+      <li class="mynav">
+      <a href="#">珠宝玉器</a><span>></span>
+        <ul class="nav-child">
+          <li><a href="#">翡翠</a></li>
+          <li><a href="#">玉石</a></li>
+          <li><a href="#">宝石</a></li>
+          <li><a href="#">水晶</a></li>
+        </ul>
+      </li>
+      <li class="mynav">
+        <a href="#">珠宝玉器</a><span>></span>
+        <ul class="nav-child">
+          <li><a href="#">翡翠</a></li>
+          <li><a href="#">玉石</a></li>
+          <li><a href="#">宝石</a></li>
+          <li><a href="#">水晶</a></li>
+          <li><a href="#">玛瑙</a></li>
+          <li><a href="#">珍珠</a></li>
+        </ul>
+      </li>
+      <li class="mynav" style="border:none">
+        <a href="#">珠宝玉器</a><span>></span>
+        <ul class="nav-child">
+          <li><a href="#">翡翠</a></li>
+          <li><a href="#">玉石</a></li>
+          <li><a href="#">宝石</a></li>
+          <li><a href="#">水晶</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+<!-- nav end-->
+</body>
+
+</html>

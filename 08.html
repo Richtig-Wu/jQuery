@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>实现注释的效果</title>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+  </head>
+     <!-- 元素：隐藏、 显示
+      $('.box').     //一秒时间去隐藏
+      $('.box').     //4秒去展示出来
+      $('.box').     //切换
+      $('.box').     //渐变，通过淡入的方式显示元素
+      $('.box').     //淡出方式隐藏元素
+      $('.box').     //切换，展示的隐藏，隐藏的展示
+      元素： 滑动
+      $('.box').      //向下滑动动画显示一个匹配元素
+      $('.box').    //向上滑动
+      $('.box').   //缓慢的隐藏匹配元素
+      }) -->
+
+  <script type="text/javascript">
+    $(function(){
+      //一秒时间去隐藏,4秒去展示出来
+        $('#btn1').click(() => {
+          $('.box').hide(1000).show(5000);
+        });
+      //切换,渐变，通过淡入的方式显示元素
+        $('#btn2').click(() => {
+          $('.box').toggle().fadeIn(3000);
+        });
+      //淡出方式隐藏元素
+        $('#btn3').click(() => {
+          $('.box').fadeTo(1000,0);
+        });
+      //切换，展示的隐藏，隐藏的展示
+        $('#btn4').click(() => {
+              $('.box').toggle(() => {
+              $(this).css('visibility','hidden');
+            });
+      });
+       //向下滑动动画显示一个匹配元素
+        $('#btn5').click(() => {
+          if($('.box').is(':hidden')){
+            $('.box').slideDown(1000);
+          }else {
+            $('.box').hide();
+          }
+        });
+        //向上滑动
+        $('#btn6').click(() => {
+          if($('.box').is(':hidden')){
+            $('.box').show(1000);
+          }else {
+            $('.box').slideUp(1000);
+          }
+        });
+        //缓慢的隐藏匹配元素
+        $('#btn7').click(() => {
+          $('.box').fadeTo(8000,0);
+        });
+    });
+  </script>
+
+  <body>
+    <div style="width:200px; position:absolute">
+      <div class="box">
+        <h1>Hello,my name's Richtig</h1>
+      </div>
+    </div>
+    <br><br>
+    <div style="margin-top:150px">
+      <button id="btn1">一秒隐藏后之，4秒展示出来</button><br><br>
+      <button id="btn2">切换后渐变淡入</button>
+      <button id="btn3">淡出方式隐藏元素</button>
+      <button id="btn4">切换，展示的隐藏，隐藏的展示</button><br><br>
+      <button id="btn5">向下滑动动画显示一个匹配元素</button>
+      <button id="btn6">向上滑动</button>
+      <button id="btn7">缓慢的隐藏匹配元素</button>
+    </div>
+  </body>
+</html>
