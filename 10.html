@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>微信APP的简单</title>
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link href="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.css" rel="stylesheet">
+  <link rel="stylesheet" href="./10.css">
+  <script src="https://cdn.bootcss.com/jquery/1.8.0/jquery-1.8.0.js"></script>
+  <script src="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.js"></script>
+</head>
+<script type="text/javascript">
+  $(() => {
+    // 点击button背景改变
+    $(".button").mousedown(function(){
+      $(this).css("background","rgb(18,18,18)");
+    }).mouseup(function(){
+      $(this).css("background","none");
+    });
+    // 点击加号显示下拉菜单
+
+      $("#more").click(function(e){
+          $("#more-item").show();
+          e.stopPropagation();
+      });
+      $("body").click(function(){
+          $("#more-item").hide();
+      })
+
+  });
+</script>
+<body>
+    <div data-role="page" id="weixin">
+      <!-- top start -->
+      <div data-role="header" class="header">
+        <span class="top-left">微信</span>
+        <div class="top-right" >
+          <span class="button" id="more"><img src="./image/ic_more.png" alt=""></span>
+          <span class="button"><img src="./image/ic_search.png" alt=""></span>
+          <ul id="more-item">
+            <li><a href="#"><img src="./image/ic_groupchat.png" alt="">发起群聊</a></li>
+            <li><a href="#"><img src="./image/ic_newfriends_2.png" alt="">添加朋友</a></li>
+            <li><a href="#"><img src="./image/ic_scan_white.png" alt="">扫一扫</a></li>
+            <li><a href="#"><img src="./image/ic_pay.png" alt="">收付款</a></li>
+            <li><a href="#"><img src="./image/ic_feedback.png" alt="">帮助和反馈</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- top end -->
+
+      <!-- main start -->
+      <div data-role="main">
+        <ul>
+          <li>11</li>
+        </ul>
+      </div>
+      <!-- main end -->
+      <!-- footer start -->
+      <div data-role="footer" data-position="fixed">
+        <ul id="footnav" class="navbar">
+          <li id="weixin"><img src="#" alt=""><a href="#">微信</a></li>
+          <li id="tonxunlu"><img src="#" alt=""><a href="#">通讯录</a></li>
+          <li id="faxian"><img src="#" alt=""><a href="#">发现</a></li>
+          <li id="me"><img src="#" alt=""><a href="#">我</a></li>
+        </ul>
+      </div>
+    </div>
+
+
+</body>
+</html>
