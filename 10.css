@@ -5,7 +5,7 @@ a{
   text-decoration: none;
 }
 
-/* top start*/
+/* top css*/
 .header{
   background: rgb(41, 36, 33) !important;
 }
@@ -83,18 +83,22 @@ a{
 
 
 
-/*foot start*/
+/*foot css*/
+.foot{
+  background:#fff !important;
+}
 .navbar{
-  margin: 5px;
+  margin: 0;
   padding: 0;
-  text-align: center;
 }
 .navbar li{
+  width: 25%;
   float: left;
+  text-align: center;
 }
-
 .navbar li img{
   width: 30px;
-  height: 30px;
-  background: red;
+}
+.navbar li a{
+  color: #a2a3a4;
 }

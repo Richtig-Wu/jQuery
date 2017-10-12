@@ -11,6 +11,7 @@
   <script src="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.js"></script>
 </head>
 <script type="text/javascript">
+  <var></var> lastTab;
   $(() => {
     // 点击button背景改变
     $(".button").mousedown(function(){
@@ -27,7 +28,21 @@
       $("body").click(function(){
           $("#more-item").hide();
       })
-
+      $("body").on("pagecreate",function(){
+        //初始化加载聊天列表
+        setChatMsgList();
+      $("#footnav li").on("tap",function(){
+        if(this == lastTab) return;
+        var img = $(lastTab).children('img');
+        var a = $(lastTab).children("a");
+        a.css("color","#8a8a8a");
+        img.attr("src","./image/" + lastTab.id + "_normal.png");
+        lastTab = this;
+        // 改变按钮样式
+        var img = $(this).children("img");
+        var a = $(this).children("a");
+      });
+    });
   });
 </script>
 <body>
@@ -57,16 +72,27 @@
       </div>
       <!-- main end -->
       <!-- footer start -->
-      <div data-role="footer" data-position="fixed">
+      <div data-role="footer" data-position="fixed" class="foot">
         <ul id="footnav" class="navbar">
-          <li id="weixin"><img src="#" alt=""><a href="#">微信</a></li>
-          <li id="tonxunlu"><img src="#" alt=""><a href="#">通讯录</a></li>
-          <li id="faxian"><img src="#" alt=""><a href="#">发现</a></li>
-          <li id="me"><img src="#" alt=""><a href="#">我</a></li>
+          <li id="tab_chat">
+              <img src="./image/tab_chat_checked.png" alt=""></br>
+              <a href="#" style="color:green">微信</a>
+          </li>
+          <li id="tab_addressbook">
+              <img src="./image/tab_addressbook_normal.png" alt=""></br>
+              <a href="#">通讯录</a>
+          </li>
+          <li id="tab_found">
+              <img src="./image/tab_found_normal.png" alt=""></br>
+              <a href="#">发现</a>
+          </li>
+          <li id="tab_me">
+              <img src="./image/tab_me_normal.png" alt=""></br>
+              <a href="#">我</a>
+          </li>
         </ul>
       </div>
+      <!-- footer end -->
     </div>
-
-
 </body>
 </html>
