@@ -11,7 +11,7 @@
   <script src="https://cdn.bootcss.com/jquery-mobile/1.4.5/jquery.mobile.js"></script>
 </head>
 <script type="text/javascript">
-  <var></var> lastTab;
+  var lastTab;
   $(() => {
     // 点击button背景改变
     $(".button").mousedown(function(){
@@ -28,7 +28,9 @@
       $("body").click(function(){
           $("#more-item").hide();
       })
-      $("body").on("pagecreate",function(){
+
+      //pagecreate:创建新的页面
+      $(document).on("pagecreate",function(){
         //初始化加载聊天列表
         setChatMsgList();
       $("#footnav li").on("tap",function(){
@@ -41,8 +43,27 @@
         // 改变按钮样式
         var img = $(this).children("img");
         var a = $(this).children("a");
+        a.css("color","red");
+        img.attr("src","./image/" + this.id + "_checked.png");
+
+        // 切换列表
+        if(this.id == "tab_chat"){
+          setChatMsgList();
+        }else if (this.id == "tab_addressbook") {
+          setAddressbookList();
+        }else if (thsi.id == "tab_me") {
+          setMeList();
+        }
       });
     });
+
+    // 初始化列表内容
+    function initMyList(){
+      let mylist = $("#mylist");
+      mylist.html(content);
+      // 重新渲染listview
+      mylist.listview("refresh");
+    }
   });
 </script>
 <body>
