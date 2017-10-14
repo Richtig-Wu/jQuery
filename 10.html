@@ -12,59 +12,188 @@
 </head>
 <script type="text/javascript">
   var lastTab;
-  $(() => {
-    // 点击button背景改变
-    $(".button").mousedown(function(){
-      $(this).css("background","rgb(18,18,18)");
-    }).mouseup(function(){
-      $(this).css("background","none");
+  var screenWidth;
+  var isFloatDisplay = false;
+  $(document).ready(function(){
+  	lastTab = $("#tab_chat")[0];
+  	//监听窗口大小改变
+    	$(window).resize(function(){
+    		screenWidth = $(document.body).width();	//宽度
+    		});
     });
-    // 点击加号显示下拉菜单
 
-      $("#more").click(function(e){
-          $("#more-item").show();
-          e.stopPropagation();
-      });
-      $("body").click(function(){
-          $("#more-item").hide();
-      })
-
-      //pagecreate:创建新的页面
-      $(document).on("pagecreate",function(){
+    //pagecreate:创建新的页面
+    $(document).on("pagecreate",function(){
         //初始化加载聊天列表
         setChatMsgList();
+        screenWidth = $(document.body).width();	//宽度
+
+    // 点击button背景改变
+    $(".button").mousedown(function(){
+          $(this).css("background","rgb(18,18,18)");
+        }).mouseup(function(){
+          $(this).css("background","none");
+        });
+
+    // 点击加号显示下拉菜单
+    $("#more").click(function(e){
+        $("#more-item").show();
+        e.stopPropagation();
+      });
+      $("body").click(function(){
+        $("#more-item").hide();
+      });
+
+
       $("#footnav li").on("tap",function(){
         if(this == lastTab) return;
+        // 恢复上个按钮为选中状态
         var img = $(lastTab).children('img');
         var a = $(lastTab).children("a");
         a.css("color","#8a8a8a");
         img.attr("src","./image/" + lastTab.id + "_normal.png");
         lastTab = this;
         // 改变按钮样式
-        var img = $(this).children("img");
-        var a = $(this).children("a");
-        a.css("color","red");
-        img.attr("src","./image/" + this.id + "_checked.png");
+          var img = $(this).children("img");
+          var a = $(this).children("a");
+          a.css("color","green");
+          img.attr("src","./image/" + this.id + "_checked.png");
 
         // 切换列表
         if(this.id == "tab_chat"){
-          setChatMsgList();
-        }else if (this.id == "tab_addressbook") {
-          setAddressbookList();
-        }else if (thsi.id == "tab_me") {
-          setMeList();
-        }
+            setChatMsgList();
+          }else if (this.id == "tab_addressbook") {
+            setAddressbookList();
+          }else if (this.id == "tab_found") {
+            setFoundList();
+          }else if (this.id == "tab_me") {
+            setMeList();
+          }
       });
     });
 
-    // 初始化列表内容
-    function initMyList(){
-      let mylist = $("#mylist");
-      mylist.html(content);
-      // 重新渲染listview
-      mylist.listview("refresh");
+
+// 初始化列表内容
+  function initMyList(content){
+    let mylist = $("#mylist");
+    mylist.html(content);
+    // 重新渲染listview
+    mylist.listview("refresh");
+  }
+//设置为聊天列表
+  function setChatMsgList(){
+    var content = "" ;
+    for(var i = 0; i < 20; i++){
+    		content += '<li><a href="#"><img src="image/head.jpg" style="margin-left:5px;margin-top:5px;width:70px;height:70px;"/><p style="float:right;color:#8a8a8a">17:26</p><h2>好友</h2><p style="color:#8a8a8a">这是聊天消息</p></a></li>';
+    	}
+	  initMyList(content);
+  }
+
+//设置为通讯录列表
+function setAddressbookList(){
+	var s = new Array();
+	s[0] = "新的朋友";
+	s[1] = "群聊";
+	s[2] = "标签";
+	s[3] = "公众号";
+	var imgnames = new Array();
+	imgnames[0] = "image/ic_newfriends.png";
+	imgnames[1] = "image/ic_chatgroup.png";
+	imgnames[2] = "image/ic_tag.png";
+	imgnames[3] = "image/ic_publicnumber.png";
+	var colors = new Array();
+	colors[0] = "#FF6100";
+	colors[1] = "#228B22";
+	colors[2] = "#4169E1";
+	colors[3] = "#4169E1";
+
+	var content = "";
+	for(var i = 0; i < s.length; i++){
+		content += '<li><a href="#"><img src="' + imgnames[i] + '" style="background:' + colors[i] + '" class="ui-li-icon"/>' + s[i] + '</a></li>';
+	}
+
+	content += '<li data-role="list-divider">A</li>';
+	content += '<li><a href="#"><img src="image/head.jpg" class="ui-li-icon"/>A联系人1</a></li>';
+	content += '<li><a href="#"><img src="image/head.jpg" class="ui-li-icon"/>A联系人2</a></li>';
+	content += '<li><a href="#"><img src="image/head.jpg" class="ui-li-icon"/>A联系人3</a></li>';
+	content += '<li data-role="list-divider">B</li>';
+	content += '<li><a href="#"><img src="image/head.jpg" class="ui-li-icon"/>B联系人1</a></li>';
+	content += '<li><a href="#"><img src="image/head.jpg" class="ui-li-icon"/>B联系人2</a></li>';
+	content += '<li><a href="#"><img src="image/head.jpg" class="ui-li-icon"/>B联系人3</a></li>';
+	content += '<li data-role="list-divider">C</li>';
+	content += '<li><a href="#"><img src="image/head.jpg" class="ui-li-icon"/>C联系人1</a></li>';
+	content += '<li><a href="#"><img src="image/head.jpg" class="ui-li-icon"/>C联系人2</a></li>';
+	content += '<li><a href="#"><img src="image/head.jpg" class="ui-li-icon"/>C联系人3</a></li>';
+	content += '<li data-role="list-divider">D</li>';
+	content += '<li><a href="#"><img src="image/head.jpg" class="ui-li-icon"/>D联系人1</a></li>';
+	content += '<li><a href="#"><img src="image/head.jpg" class="ui-li-icon"/>D联系人2</a></li>';
+	content += '<li data-role="list-divider">E</li>';
+	content += '<li><a href="#"><img src="image/head.jpg" class="ui-li-icon"/>E联系人1</a></li>';
+
+	initMyList(content);
+}
+
+
+//设置为发现列表
+    function setFoundList(){
+    	var s = new Array();
+    	s[0] = "朋友圈";
+    	s[1] = "扫一扫";
+    	s[2] = "摇一摇";
+    	s[3] = "附近的人";
+    	s[4] = "漂流瓶";
+    	s[5] = "购物";
+    	s[6] = "游戏";
+    	var imgnames = new Array();
+    	imgnames[0] = "image/ic_friendscircle.png";
+    	imgnames[1] = "image/ic_scan.png";
+    	imgnames[2] = "image/ic_shake.png";
+    	imgnames[3] = "image/ic_nearbypeople.png";
+    	imgnames[4] = "image/ic_driftingbottle.png";
+    	imgnames[5] = "image/ic_shopping.png";
+    	imgnames[6] = "image/ic_game.png";
+
+    	var content = "";
+    	for(var i = 0; i < s.length; i++){
+    		if(i == 0 || i % 2 != 0){
+    			content += '<li data-role="list-divider"></li>';
+    		}
+    		content += '<li><a href="#"><img src="' + imgnames[i] + '" class="ui-li-icon"/>' + s[i] + '</a></li>';
+    	}
+    	0,1,3,5
+
+    	initMyList(content);
     }
-  });
+
+//设置为我的列表
+  function setMeList(){
+  	var s = new Array();
+  	s[0] = "相册";
+  	s[1] = "收藏";
+  	s[2] = "钱包";
+  	s[3] = "卡包";
+  	s[4] = "表情";
+  	s[5] = "设置";
+  	var imgnames = new Array();
+  	imgnames[0] = "image/ic_album.png";
+  	imgnames[1] = "image/ic_collection.png";
+  	imgnames[2] = "image/ic_wallet.png";
+  	imgnames[3] = "image/ic_cardpackage.png";
+  	imgnames[4] = "image/ic_expression.png";
+  	imgnames[5] = "image/ic_setting.png";
+
+  	var content = "";
+  	content += '<li data-role="list-divider"></li>';
+  	content += '<li><a href="#"><img src="image/head.jpg" style="margin-left:5px;margin-top:5px;width:70px;height:70px;"/><h1 style="float:left;margin-top:18px">蜡笔小新</h1><img src="image/qrcode.png" style="float:right;width:20px;height:20px;margin-top:18px"/></a></li>';
+  	for(var i = 0; i < s.length; i++){
+  		if(i % 2 == 0 || i > 3){
+  			content += '<li data-role="list-divider"></li>';
+  		}
+  		content += '<li><a href="#"><img src="' + imgnames[i] + '" class="ui-li-icon"/>' + s[i] + '</a></li>';
+  	}
+
+  	initMyList(content);
+  }
 </script>
 <body>
     <div data-role="page" id="weixin">
@@ -86,29 +215,29 @@
       <!-- top end -->
 
       <!-- main start -->
-      <div data-role="main">
-        <ul>
-          <li>11</li>
-        </ul>
+      <div data-role="main" class="ui-content">
+        <div class="float">
+          <ul data-role="listview" data-icon="false" id="mylist">11</ul>
+        </div>
       </div>
       <!-- main end -->
       <!-- footer start -->
       <div data-role="footer" data-position="fixed" class="foot">
         <ul id="footnav" class="navbar">
           <li id="tab_chat">
-              <img src="./image/tab_chat_checked.png" alt=""></br>
+              <img src="./image/tab_chat_checked.png"></br>
               <a href="#" style="color:green">微信</a>
           </li>
           <li id="tab_addressbook">
-              <img src="./image/tab_addressbook_normal.png" alt=""></br>
+              <img src="./image/tab_addressbook_normal.png"></br>
               <a href="#">通讯录</a>
           </li>
           <li id="tab_found">
-              <img src="./image/tab_found_normal.png" alt=""></br>
+              <img src="./image/tab_found_normal.png"></br>
               <a href="#">发现</a>
           </li>
           <li id="tab_me">
-              <img src="./image/tab_me_normal.png" alt=""></br>
+              <img src="./image/tab_me_normal.png"></br>
               <a href="#">我</a>
           </li>
         </ul>
